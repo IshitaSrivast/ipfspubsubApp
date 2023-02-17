@@ -20,8 +20,24 @@ $ npm install
 
 Start the example application:
 
-```sh
-npm start
+```console
+$ node ./node1-api/serv.js
+```
+```console
+$ node ./node2-api/serv.js
+```
+In another terminal
+```console
+cd node1-react-app
+
+npm run start
+```
+
+In another terminal
+```console
+cd node2-react-app
+
+npm run start
 ```
 
 ### 1. Start two IPFS nodes
@@ -53,13 +69,13 @@ ipfs config --json API.HTTPHeaders.Access-Control-Allow-Origin '["http://127.0.0
 ipfs daemon --enable-pubsub-experiment
 ```
 
-In the "API ADDR" field enter `/ip4/127.0.0.1/tcp/5001` in one browser and `/ip4/127.0.0.1/tcp/5002` in the other and hit the "Connect" button.
+In the "Node to connect to" field enter `/ip4/127.0.0.1/tcp/5001` in one browser and `/ip4/127.0.0.1/tcp/5002` in the other.
 
 This connects each browser to an IPFS node and now from the comfort of our browser we can instruct each node to listen to a pubsub topic and send/receive pubsub messages to each other.
 
-> N.B. Since our two IPFS nodes are running on the same network they should have already found each other by MDNS. So the "CONNECT TO PEER" field is not required. If you find your pubsub messages aren't getting through, check the output from your `jsipfs daemon` command and find the first address listed in "Swarm listening on" - it'll look like `/ip4/127.0.0.1/tcp/4002/ipfs/Qm...`. Paste this address into the "CONNECT TO PEER" field for the browser that is connected to your go-ipfs node and hit connect.
+> N.B. Since our two IPFS nodes are running on the same network they should have already found each other by MDNS. So the "CONNECT TO PEER" field is not required. If you find your pubsub messages aren't getting through, check the output from your `jsipfs daemon` command and find the first address listed in "Swarm listening on" - it'll look like `/ip4/127.0.0.1/tcp/4002/ipfs/Qm...`. Paste this address into the "Peer to connect to" field for the browser that is connected to your go-ipfs node and hit connect.
 
-Finally, use the "SUBSCRIBE TO PUBSUB TOPIC" and "SEND MESSAGE" fields to do some pubsub-ing, you should see messages sent from one browser appear in the log of the other (provided they're both subscribed to the same topic) by clicking on API button.
+Finally, use the "Subscribe To" and "Message to send" fields to do some pubsub-ing, you should see messages sent from one browser appear in the log of the other (provided they're both subscribed to the same topic) by clicking on Call API button.
 
 
 ## Code Execution
@@ -69,7 +85,7 @@ Finally, use the "SUBSCRIBE TO PUBSUB TOPIC" and "SEND MESSAGE" fields to do som
 ## Code Breakdown
 The node1-api has serv.js file that contains functions:
 - `function nodeConnect` to create IPFS node and connect it to the browser
-- `function nodeConnect`for peer discovery and connection
+- `function peerConnect`for peer discovery and connection
 - `function subscribe` takes a topic as an argument and uses pubsub.subscribe to recieve messages relate to the topic.
 - `function send` takes message as and uses pubsub.publish to send messages related to the topic.
 
