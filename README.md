@@ -64,7 +64,7 @@ Finally, use the "SUBSCRIBE TO PUBSUB TOPIC" and "SEND MESSAGE" fields to do som
 
 ## Code Execution
 #### Clip:
-![alt text](https://github.com/IshitaSrivast/ipfspubsubApp/blob/master/files/tutorial.gif)
+![alt text](https://github.com/IshitaSrivast/ipfspubsubApp/blob/main/files/tutorial.gif)
 
 ## Code Breakdown
 The node1-api has serv.js file that contains functions:
