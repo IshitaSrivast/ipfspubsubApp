@@ -1,6 +1,6 @@
 # README
+Publish-Subscribe, called 'pubsub' for short, is provided by IPFS for providing greater network scalability and flexibility. Publishers send messages classified by topic or content and Subscribers receive only the messages they are interested in. This repository is the messaging platform between two IPFS nodes and exchanges messages between Node1 and Node2 on topic of common interest by using PubSub. The two Node implementations have similar code-breakdown and are separate as I was facing the issue as put up in https://github.com/ipfs/js-ipfs/issues/1858 while trying to run multiple IPFS nodes on the same machine. The implementation in the repository resolves the issue and can be used to see the running example of the IPFS PubSub on the same machine.
 
-This is a
 
 ### Prerequisites
 
@@ -28,7 +28,7 @@ npm start
 
 To demonstrate pubsub we need two nodes running so pubsub messages can be passed between them.
 
-Right now the easiest way to do this is to install and start a `js-ipfs` and `go-ipfs` node. There are other ways to do this, see [this document on running multiple nodes](https://github.com/ipfs-examples/js-ipfs-examples/running-multiple-nodes) for details.
+Right now the easiest way to do this is to install and start a `js-ipfs` and `go-ipfs` node. 
 
 ### 2. Start the IPFS nodes
 
@@ -57,9 +57,9 @@ In the "API ADDR" field enter `/ip4/127.0.0.1/tcp/5001` in one browser and `/ip4
 
 This connects each browser to an IPFS node and now from the comfort of our browser we can instruct each node to listen to a pubsub topic and send/receive pubsub messages to each other.
 
-> N.B. Since our two IPFS nodes are running on the same network they should have already found each other by MDNS. So you probably won't need to use the "CONNECT TO PEER" field. If you find your pubsub messages aren't getting through, check the output from your `jsipfs daemon` command and find the first address listed in "Swarm listening on" - it'll look like `/ip4/127.0.0.1/tcp/4002/ipfs/Qm...`. Paste this address into the "CONNECT TO PEER" field for the browser that is connected to your go-ipfs node and hit connect.
+> N.B. Since our two IPFS nodes are running on the same network they should have already found each other by MDNS. So the "CONNECT TO PEER" field is not required. If you find your pubsub messages aren't getting through, check the output from your `jsipfs daemon` command and find the first address listed in "Swarm listening on" - it'll look like `/ip4/127.0.0.1/tcp/4002/ipfs/Qm...`. Paste this address into the "CONNECT TO PEER" field for the browser that is connected to your go-ipfs node and hit connect.
 
-Finally, use the "SUBSCRIBE TO PUBSUB TOPIC" and "SEND MESSAGE" fields to do some pubsub-ing, you should see messages sent from one browser appear in the log of the other (provided they're both subscribed to the same topic).
+Finally, use the "SUBSCRIBE TO PUBSUB TOPIC" and "SEND MESSAGE" fields to do some pubsub-ing, you should see messages sent from one browser appear in the log of the other (provided they're both subscribed to the same topic) by clicking on API button.
 
 
 ## Code Execution
@@ -67,10 +67,15 @@ Finally, use the "SUBSCRIBE TO PUBSUB TOPIC" and "SEND MESSAGE" fields to do som
 ![alt text](https://github.com/Aryamanraj/multicallQuotes/blob/master/tutorial.gif)
 
 ## Code Breakdown
-The code contains three functions:
-- `price(link)` takes a link as an argument and returns a smart contract instance of the AggregatorV3Interface using the ABI in the code.
-- `masterlist(listing)` takes a list of integers as an argument and returns a dictionary of the selected cryptocurrencies and their corresponding contract addresses.
-- `main()` is the main function that prompts the user to select cryptocurrencies from a list. It uses the `multicall` function from Brownie to retrieve the price data from the selected contracts, and stores the result in a list of dictionaries. The result is then printed.
+The node1-api has serv.js file that contains functions:
+- `function nodeConnect` to create IPFS node and connect it to the browser
+- `function nodeConnect`for peer discovery and connection
+- `function subscribe` takes a topic as an argument and uses pubsub.subscribe to recieve messages relate to the topic.
+- `function send` takes message as and uses pubsub.publish to send messages related to the topic.
+
+
+The node2-api has similar code breakdown
+
 
 ## Conclusion
-This script can be used as a starting point for retrieving price data from smart contracts on the Ethereum network using Brownie.
+The exchange of messages between Node1 and Node2 on topic of common interest is successfully implemented by the use of PubSub
