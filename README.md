@@ -64,7 +64,7 @@ Finally, use the "SUBSCRIBE TO PUBSUB TOPIC" and "SEND MESSAGE" fields to do som
 
 ## Code Execution
 #### Clip:
-![alt text](https://github.com/Aryamanraj/multicallQuotes/blob/master/files/gif3.gif)
+![alt text](https://github.com/Aryamanraj/multicallQuotes/blob/master/tutorial.gif)
 
 ## Code Breakdown
 The code contains three functions:
