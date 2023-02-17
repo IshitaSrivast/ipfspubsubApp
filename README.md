@@ -74,8 +74,8 @@ The node1-api has serv.js file that contains functions:
 - `function send` takes message as and uses pubsub.publish to send messages related to the topic.
 
 
-The node2-api has similar code breakdown
+The node2-api has similar code breakdown.
 
 
 ## Conclusion
-The exchange of messages between Node1 and Node2 on topic of common interest is successfully implemented by the use of PubSub
+The exchange of messages between Node1 and Node2 on topic of common interest is successfully implemented by the use of PubSub.
